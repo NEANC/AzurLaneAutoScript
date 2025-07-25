@@ -1,0 +1,22 @@
+name: 自动追踪上游[Merge预设]
+on:
+  schedule:
+    # 北京时间每8小时运行一次：04:00 (UTC 20:00)，12:00 (UTC 04:00)，20:00 (UTC 12:00)
+    - cron: '0 4,12,20 * * *'
+  workflow_dispatch:    # 支持手动触发
+
+jobs:
+  merge-upstream:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: master             # set the branch to merge to
+          fetch-depth: 0 
+      - name: Merge Upstream
+        uses: exions/merge-upstream@v1
+        with:
+          upstream: Zuosizhu/Alas-with-Dashboard      # set the upstream repo
+          upstream-branch: master   # set the upstream branch to merge from
+          branch: master          # set the branch to merge to

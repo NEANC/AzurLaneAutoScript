@@ -1,0 +1,64 @@
+name: 强制同步:最上游到auto-pull分支
+
+on:
+  schedule:
+    # 北京时间每8小时运行一次：04:00 (UTC 20:00)，12:00 (UTC 04:00)，20:00 (UTC 12:00)
+    - cron: '0 4,12,20 * * *'
+  workflow_dispatch:     # 允许手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      # STEP 1: 检出目标分支
+      - name: Checkout dev branch
+        uses: actions/checkout@v4
+        with:
+          ref: 'auto-pull'  # 指定目标分支
+          fetch-depth: 0
+
+      # STEP 2: 添加最上游远程
+      - name: Add topstream remote
+        run: |
+          git remote add topstream https://github.com/LmeSzinc/AzurLaneAutoScript.git
+          git fetch topstream
+
+      # STEP 3: 尝试合并
+      - name: Try to merge changes
+        id: merge
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@users.noreply.github.com"
+          
+          if git merge topstream/master --allow-unrelated-histories -m "Merge topstream updates"; then
+            echo "status=success" >> $GITHUB_OUTPUT
+          else
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "::error::Merge conflict detected!"
+              exit 1
+            else
+              echo "status=no-changes" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      # STEP 4: 推送到目标分支
+      - name: Push to dev branch
+        if: steps.merge.outputs.status == 'success'
+        run: git push origin auto-pull  # 推送到指定分支
+
+      # STEP 5: 冲突处理
+      - name: Create issue on conflict
+        if: ${{ failure() && steps.merge.conclusion == 'failure' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "⚠️ Merge conflict in dev branch",  # 添加分支信息
+              body: `dev 分支自动合并失败！需要手动解决冲突：\n\n` +
+                    `工作流运行: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`
+            })
