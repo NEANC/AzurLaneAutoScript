@@ -1,4 +1,4 @@
-name: 自动追踪最上游到auto-pull分支[Aormsby预设]
+name: 自动追踪最上游到pr-3491分支[Aormsby预设]
 
 on:
   schedule:
