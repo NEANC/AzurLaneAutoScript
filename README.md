@@ -8,8 +8,8 @@
 
 ---
 
-| 分支                                                                     | 同步时间                | 类型         | 结构                |
-| :----------------------------------------------------------------------- | :---------------------- | :----------- | :------------------ |
-| [master](https://github.com/NEANC/Alas-with-Dashboard/tree/master)       | 北京时间 12:00 与 12:15 | 与上游同步   |                     |
-| [auto-pull](https://github.com/NEANC/Alas-with-Dashboard/tree/auto-pull) | 北京时间 08:00          | 与最上游同步 | 上游+最上游         |
-| [pr-3491](https://github.com/NEANC/Alas-with-Dashboard/tree/pr-3491)     | 北京时间 08:15          | 与最上游同步 | 上游+pr-3491+最上游 |
+| 分支                                                                     | 同步时间       | 类型         | 结构                |
+| :----------------------------------------------------------------------- | :------------- | :----------- | :------------------ |
+| [master](https://github.com/NEANC/Alas-with-Dashboard/tree/master)       | 北京时间 08:30 | 与上游同步   |                     |
+| [auto-pull](https://github.com/NEANC/Alas-with-Dashboard/tree/auto-pull) | 北京时间 08:00 | 与最上游同步 | 上游+最上游         |
+| [pr-3491](https://github.com/NEANC/Alas-with-Dashboard/tree/pr-3491)     | 北京时间 08:15 | 与最上游同步 | 上游+pr-3491+最上游 |

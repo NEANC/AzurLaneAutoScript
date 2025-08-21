@@ -1,10 +1,10 @@
-name: 自动追踪最上游到pr-3491分支
+name: 自动追踪上游到master分支
 
 on:
   schedule:
-    # 每天 北京时间 08:15 (UTC 00:15)运行一次
+    # 每天 北京时间 08:30 (UTC 00:30)运行一次
     # 备用：04:00 (UTC 20:00)，08:00 (UTC 00:00)，12:00 (UTC 04:00)
-    - cron: '15 0 * * *'
+    - cron: '30 0 * * *'
 
   workflow_dispatch:     # 允许手动触发
     inputs:
@@ -26,7 +26,7 @@ jobs:
       with:
         # optional: set the branch to checkout,
         # sync action checks out your 'target_sync_branch' anyway
-        ref: pr-3491
+        ref: master
         # REQUIRED if your upstream repo is private (see wiki)
         persist-credentials: false
 
@@ -36,11 +36,11 @@ jobs:
       id: sync
       uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.1
       with:
-        target_sync_branch: pr-3491
+        target_sync_branch: master
         # REQUIRED 'target_repo_token' exactly like this!
         target_repo_token: ${{ secrets.GITHUB_TOKEN }}
         upstream_sync_branch: master
-        upstream_sync_repo: LmeSzinc/AzurLaneAutoScript
+        upstream_sync_repo: Zuosizhu/Alas-with-Dashboard
         # upstream_repo_access_token: ${{ secrets.UPSTREAM_REPO_SECRET }}
 
         # Set test_mode true during manual dispatch to run tests instead of the true action!!

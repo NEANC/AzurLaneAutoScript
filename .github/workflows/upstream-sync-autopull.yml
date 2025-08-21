@@ -1,4 +1,4 @@
-name: 自动追踪最上游到auto-pull分支[Aormsby预设]
+name: 自动追踪最上游到auto-pull分支
 
 on:
   schedule:
