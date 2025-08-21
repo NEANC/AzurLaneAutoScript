@@ -1,11 +1,15 @@
-相比于源库增加了仪表盘
+# 自动化运行分支
 
-提供了一个较为实用的仪表盘，感谢@MengNianxiaoyao 作出的美观调整
+避免相关分支提交导致自动化合并失败，所独立的分支
 
-![image](https://github.com/Zuosizhu/Alas-with-Dashboard/assets/60862861/ee2e3e8f-9a19-417e-8e5f-441ecdee1ae6)
+---
 
-![image](https://github.com/Zuosizhu/Alas-with-Dashboard/assets/60862861/55f95cb3-5234-45d3-a265-6b5e0ab5fc3e)
+#### [最上游](https://redirect.github.com/LmeSzinc/AzurLaneAutoScript) | [上游](https://redirect.github.com/Zuosizhu/Alas-with-Dashboard) | [pr-3491](https://redirect.github.com/LmeSzinc/AzurLaneAutoScript/pull/3491)
 
-![image](https://github.com/Zuosizhu/Alas-with-Dashboard/assets/60862861/6033931a-c4ea-4262-853f-f315f076d305)
+---
 
-![image](https://github.com/Zuosizhu/Alas-with-Dashboard/assets/60862861/6fafb159-2092-4423-9d58-3d6c1262e691)
+| 分支                                                                     | 同步时间                | 类型         | 结构                |
+| :----------------------------------------------------------------------- | :---------------------- | :----------- | :------------------ |
+| [master](https://github.com/NEANC/Alas-with-Dashboard/tree/master)       | 北京时间 12:00 与 12:15 | 与上游同步   |                     |
+| [auto-pull](https://github.com/NEANC/Alas-with-Dashboard/tree/auto-pull) | 北京时间 08:00          | 与最上游同步 | 上游+最上游         |
+| [pr-3491](https://github.com/NEANC/Alas-with-Dashboard/tree/pr-3491)     | 北京时间 08:15          | 与最上游同步 | 上游+pr-3491+最上游 |
